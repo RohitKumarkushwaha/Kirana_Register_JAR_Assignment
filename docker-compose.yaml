@@ -1,0 +1,30 @@
+version: "3.8"  # Updated to the latest version of Docker Compose
+
+services:
+  db:
+    image: postgres:13  # Specific version for better control
+    restart: always
+    volumes:
+      - ./data/db:/var/lib/postgresql/data  # Persistent volume for database data
+    ports:
+      - "5432:5432"  # Expose PostgreSQL on port 5432
+    environment:
+      POSTGRES_DB: kiranaDB
+      POSTGRES_USER: yash  # Updated user to a valid username format
+      POSTGRES_PASSWORD: Yash@2012  # Keep your password secure
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U yash"]  # Healthcheck for PostgreSQL
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8081:8080"  # Adminer will run on port 8081 locally, connects to db on port 8080
+    depends_on:
+      db:
+        condition: service_healthy  # Ensure db is up before starting Adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: db  # Link Adminer to the PostgreSQL database

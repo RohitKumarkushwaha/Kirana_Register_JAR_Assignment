@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-KiranaRegisterApplication<Kirana_Register>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.kirana_register_API.KiranaRegisterApplication",
+      "projectName": "Kirana_Register",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
